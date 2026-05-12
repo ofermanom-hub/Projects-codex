@@ -321,6 +321,11 @@ def index():
     return resp
 
 
+@app.route("/health")
+def health():
+    return {"status": "ok"}, 200
+
+
 @app.route("/api/search")
 def search():
     q        = request.args.get("q", "italian brainrot")
