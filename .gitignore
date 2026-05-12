@@ -40,3 +40,10 @@ ENV/
 # GIF curator data (local cache)
 geometry-dash-godot/gif_server/data/
 geometry-dash-godot/gif_server/.godot/
+
+# Game/engine binaries — never commit
+*.exe
+Godot_v*.zip
+geometry-dash/*.exe
+geometry-dash-godot/Godot_*.exe
+geometry-dash-godot/Godot_*.zip
