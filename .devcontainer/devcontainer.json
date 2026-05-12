@@ -1,0 +1,21 @@
+{
+  "name": "Geometry Dash GIF Curator",
+  "dockerFile": "geometry-dash-godot/gif_server/Dockerfile",
+  "context": "..",
+  "workspaceFolder": "/workspace/geometry-dash-godot/gif_server",
+  "settings": {
+    "python.defaultInterpreterPath": "/usr/local/bin/python",
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+  "postCreateCommand": "python -m pip install -r requirements.txt",
+  "forwardPorts": [8080],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}

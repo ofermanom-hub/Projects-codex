@@ -1,0 +1,40 @@
+name: GIF Curator Deploy
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'geometry-dash-godot/gif_server/**'
+      - '.github/workflows/gif-curator-deploy.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --upgrade pip setuptools wheel
+      - run: python -m pip install -r geometry-dash-godot/gif_server/requirements.txt
+      - run: python -m py_compile geometry-dash-godot/gif_server/server.py
+
+  deploy-to-render:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to Render
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          if [ -z "${{ secrets.RENDER_DEPLOY_HOOK }}" ]; then
+            echo "⚠️  RENDER_DEPLOY_HOOK secret not set. Manual deployment needed:"
+            echo "1. Go to https://dashboard.render.com"
+            echo "2. Create a new Web Service"
+            echo "3. Connect your GitHub repo"
+            echo "4. Add deploy hook URL to RENDER_DEPLOY_HOOK secret"
+          else
+            curl "${{ secrets.RENDER_DEPLOY_HOOK }}"
+          fi

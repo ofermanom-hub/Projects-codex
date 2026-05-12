@@ -1,0 +1,10 @@
+[budget]
+# Soft monthly token target — just for the progress bar (you're on Claude Pro)
+monthly_tokens = 5_000_000
+
+[ntfy]
+topic  = "ofer-claude-gd"
+server = "https://ntfy.sh"
+
+[server]
+port = 8765

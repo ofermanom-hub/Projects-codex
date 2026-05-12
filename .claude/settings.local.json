@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls -lat *.exe index.html rebuild.py embed_hero.py)",
+      "Bash(wc -l index.html rebuild.py embed_hero.py)",
+      "Bash(which godot *)",
+      "Read(//Applications/**)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --check-only --path .)",
+      "Bash(grep -qE \"SCRIPT ERROR|Parse Error|ERROR|Cannot|done\\\\.|Project loaded|^$\" /private/tmp/claude-502/-Users-ofer-Projects/6fd26976-07a1-4391-90c6-e71b0263ee49/tasks/bue4w0w1m.output)",
+      "Bash(wait 10579)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(ps -o etime= -p 10579)"
+    ]
+  }
+}

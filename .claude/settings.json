@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm -rf /tmp/tg-mcp)",
+      "Bash(touch /tmp/tg-mcp/in.txt /tmp/tg-mcp/out.log)",
+      "Read(//private/tmp/tg-mcp/**)",
+      "Bash(nohup bash -c 'tail -n +1 -f /tmp/tg-mcp/in.txt | mcp-telegram sign-in --api-id 36338914 --api-hash fa9433b945802e5f66f9df6cb3538cb4 --phone-number +972546722588 > /tmp/tg-mcp/out.log 2>&1')",
+      "Bash(disown)",
+      "Bash(echo \"40902\" >> /tmp/tg-mcp/in.txt && sleep 8 && echo \"--- out.log ---\" && cat /tmp/tg-mcp/out.log && echo \"--- procs ---\" && pgrep -fl \"mcp-telegram sign-in\" || echo \"sign-in done\")",
+      "Bash(pkill -f \"tail -n +1 -f /tmp/tg-mcp/in.txt\")",
+      "Bash(pkill -f \"mcp-telegram sign-in\")",
+      "Bash(mcp-telegram run *)",
+      "Bash(claude mcp *)",
+      "Bash(find /Users/ofer/Projects/geometry-dash/godot-gd/assets -name \"*.gif\" -o -name \"*.GIF\" | head -20; echo \"---\"; find /Users/ofer/Projects/geometry-dash/godot-gd/assets -name \"*.png\" -newer /tmp -mtime -30 2>/dev/null | wc -l; echo \"---\"; ls /Users/ofer/Projects/geometry-dash/godot-gd/assets/sprites/kenney/ | wc -l)",
+      "Read(//private/tmp/**)",
+      "Bash(grep -vE \"^\\(bg_|char_|monster_\\).*\\\\.png$\")",
+      "Bash(grep \"\\\\.png$\")",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit-after 200 --path .)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit-after 200 --path /Users/ofer/Projects/geometry-dash/godot-gd)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --verbose --quit-after 100 --path /Users/ofer/Projects/geometry-dash/godot-gd)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --headless --quit-after 100 --path /Users/ofer/Projects/geometry-dash/godot-gd)",
+      "Bash(.venv312/bin/python -c \"import flask, PIL, requests; print\\('deps ok'\\)\")",
+      "Bash(/Users/ofer/Projects/geometry-dash-godot/gif_server/.venv312/bin/python server.py)",
+      "Bash(echo \"PID=$!\")",
+      "Bash(curl -s -o /dev/null -w \"HTTP=%{http_code}\\\\n\" http://localhost:8080/api/pool)",
+      "Bash(/Applications/Godot.app/Contents/MacOS/Godot --path /Users/ofer/Projects/geometry-dash/godot-gd > /tmp/godot_run.log 2>&1 & *)"
+    ],
+    "additionalDirectories": [
+      "/private/tmp/tg-mcp",
+      "/tmp"
+    ]
+  }
+}

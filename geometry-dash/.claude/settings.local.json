@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Skill(update-config)",
+      "WebFetch(domain:kenney.nl)",
+      "WebFetch(domain:freesound.org)",
+      "WebFetch(domain:docs.readyplayer.me)",
+      "WebFetch(domain:readyplayer.me)",
+      "WebSearch",
+      "WebFetch(domain:polyhaven.com)"
+    ]
+  }
+}

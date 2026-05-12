@@ -1,0 +1,29 @@
+; Engine configuration file.
+; Generated for Geometry Dash — Godot 4.3
+
+config_version=5
+
+[application]
+
+config/name="Geometry Dash"
+run/main_scene="res://scenes/Main.tscn"
+config/features=PackedStringArray("4.3", "Forward Plus")
+
+[autoload]
+
+GifPool="*res://scripts/GifPool.gd"
+
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=true
+window/stretch/mode="canvas_items"
+window/stretch/aspect="keep"
+
+[rendering]
+
+renderer/rendering_method="forward_plus"
+viewport/hdr_2d=true
+environment/defaults/default_clear_color=Color(0.04, 0.04, 0.06, 1)
+textures/vram_compression/import_etc2_astc=true
