@@ -37,10 +37,14 @@ ENV/
 *~
 .DS_Store
 
-# GIF curator data — commit pool.json, candidates.json, meta + spritesheets
-# Block raw GIFs, gphotos clips, OAuth tokens / session files
+# GIF curator data — commit pool.json, candidates.json, meta + base spritesheets.
+# Block raw GIFs, rembg-extracted subjects (regen'd locally), gphotos clips,
+# OAuth tokens / session files. Render slug is size-limited, so subjects stay
+# local — the game falls back to the full spritesheet under the polygon when
+# subject_spritesheet.png is missing.
 geometry-dash-godot/gif_server/data/gifs/
 geometry-dash-godot/gif_server/data/gphotos_clips/
+geometry-dash-godot/gif_server/data/frames/**/subject_spritesheet.png
 geometry-dash-godot/gif_server/data/gphotos_token.json
 geometry-dash-godot/gif_server/data/gphotos_picker_session.json
 geometry-dash-godot/gif_server/data/gphotos_state.txt
