@@ -32,7 +32,7 @@ class GifAnim:
 
 	func current_polygon() -> PackedVector2Array:
 		if polygons.is_empty(): return PackedVector2Array()
-		return polygons[_f]
+		return polygons[_f % polygons.size()]
 
 	func current_subject() -> ImageTexture:
 		return subject_frames[_f] if not subject_frames.is_empty() else null
@@ -45,6 +45,8 @@ var _session_bg = null  # GifAnim or null — re-randomised each session start
 var _bg_idx : int = 0
 
 var _pending: Array = []  # pool entries still to download
+var _active_workers: int = 0  # parallel download workers in flight
+const MAX_WORKERS := 8
 
 # ── Lifecycle ─────────────────────────────────────────────────────────────────
 func _ready() -> void:
@@ -82,26 +84,30 @@ func _on_pool_fetched(result: int, code: int, _headers, body: PackedByteArray) -
 		pool_ready.emit()
 		return
 
-	_download_next()
+	# Fan out parallel download workers — each pulls entries off _pending until
+	# the queue is empty, then decrements _active_workers. The last worker
+	# emits pool_ready.
+	var workers : int = mini(MAX_WORKERS, _pending.size())
+	_active_workers = workers
+	for i in workers:
+		_download_next()
 
 # ── Spritesheet download loop ─────────────────────────────────────────────────
 func _download_next() -> void:
 	if _pending.is_empty():
-		assign_session_gifs()
-		pool_ready.emit()
+		# This worker is done — when the last one exits, emit pool_ready.
+		_active_workers -= 1
+		if _active_workers <= 0:
+			assign_session_gifs()
+			pool_ready.emit()
 		return
 
-	var entry: Dictionary  = _pending[0]
+	var entry: Dictionary  = _pending.pop_front()
 	var gif_id: String     = entry["id"]
 	var cache_path: String = "user://gif_cache/%s/spritesheet.png" % gif_id
 
-	if FileAccess.file_exists(cache_path):
-		_load_spritesheet(entry, cache_path)
-		_pending.pop_front()
-		_download_subject(entry, func(): _download_next())
-		return
-
-	# Ensure cache dir exists
+	# Always re-download from server so updates show up immediately.
+	# Cache file (if present) is overwritten by the response body.
 	var abs_dir := OS.get_user_data_dir() + "/gif_cache/" + gif_id
 	DirAccess.make_dir_recursive_absolute(abs_dir)
 
@@ -118,13 +124,11 @@ func _download_next() -> void:
 			_load_spritesheet(entry, cache_path)
 		else:
 			push_warning("GifPool: failed to download spritesheet for %s" % gif_id)
-		_pending.pop_front()
 		_download_subject(entry, func(): _download_next())
 	)
 	var err := req.request("%s/api/spritesheet/%s" % [SERVER, gif_id])
 	if err != OK:
 		push_warning("GifPool: request error for %s" % gif_id)
-		_pending.pop_front()
 		_download_next()
 
 # ── Subject spritesheet download ──────────────────────────────────────────────
@@ -134,10 +138,7 @@ func _download_subject(entry: Dictionary, on_done: Callable) -> void:
 		return
 	var gif_id: String     = entry["id"]
 	var subject_path: String = "user://gif_cache/%s/subject_spritesheet.png" % gif_id
-	if FileAccess.file_exists(subject_path):
-		_load_subject_spritesheet(entry, subject_path)
-		on_done.call()
-		return
+	# Always re-download — cache file is overwritten on success.
 	var req := HTTPRequest.new()
 	add_child(req)
 	req.request_completed.connect(func(result, code, _hdrs, body):
@@ -237,10 +238,18 @@ func assign_session_gifs() -> void:
 
 # ── Public API ────────────────────────────────────────────────────────────────
 func get_obstacle_gif(_obs_type: String):  # -> GifAnim or null
-	# Returns a fresh random pick from the full obstacle pool on every call.
-	# With 200+ approved GIFs every spawned obstacle gets its own animation.
+	# Returns a fresh random pick from the obstacle pool on every call,
+	# preferring GIFs that have polygon data so every obstacle can render
+	# as a silhouette contour. Falls back to the full pool only if no GIF
+	# has polygon data.
 	if obstacle_gifs.is_empty():
 		return null
+	var with_poly : Array = []
+	for ga in obstacle_gifs:
+		if not ga.polygons.is_empty():
+			with_poly.append(ga)
+	if not with_poly.is_empty():
+		return with_poly[randi() % with_poly.size()]
 	return obstacle_gifs[randi() % obstacle_gifs.size()]
 
 func get_background_gif():                 # -> GifAnim or null

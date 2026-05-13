@@ -7,7 +7,7 @@ Usage:
   open http://localhost:8080
 """
 
-import os, json, hashlib, time, io, threading, base64, glob, random, subprocess, shutil, tempfile
+import os, json, hashlib, time, io, threading, base64, glob, random, subprocess, shutil, tempfile, queue
 import requests
 import numpy as np
 from PIL import Image, ImageFilter, ImageDraw
@@ -36,6 +36,8 @@ OBS_SIZE   = (64, 64)
 BG_SIZE    = (640, 180)
 MAX_FRAMES = 20
 POLY_PTS   = 20   # target polygon vertices per frame after simplification
+REMBG_KEYFRAMES = 12   # rembg runs on this many evenly-spaced frames; others copy alpha from nearest
+BG_REMBG_SCALE  = 0.5  # downscale background frames before rembg, then upscale alpha
 
 # Global rembg session (lazy-loaded, shared across requests)
 _rembg_session = None
@@ -43,6 +45,98 @@ _rembg_lock    = threading.Lock()
 
 # Subject-processing progress tracker
 _subject_progress = {"running": False, "done": 0, "total": 0, "current": ""}
+
+# Single-worker queue for subject extraction (rembg is not designed for concurrent
+# calls; serializing also keeps memory predictable on Render free tier).
+# Pending jobs are persisted to PENDING_FILE so that a server restart mid-queue
+# re-enqueues them instead of silently dropping in-flight work.
+PENDING_FILE    = os.path.join(DATA, "pending_subjects.json")
+_extract_queue  = queue.Queue()
+_extract_status = {}   # gif_id -> "queued" | "running" | "ready" | "error"
+_extract_lock   = threading.Lock()
+_pending_lock   = threading.Lock()
+
+def _persist_pending_add(gif_id, gif_type, gif_path):
+    with _pending_lock:
+        pending = []
+        if os.path.exists(PENDING_FILE):
+            try:
+                pending = json.load(open(PENDING_FILE))
+            except Exception:
+                pending = []
+        # Replace any prior entry for this gid (e.g., retries) then append.
+        pending = [p for p in pending if p[0] != gif_id]
+        pending.append([gif_id, gif_type, gif_path])
+        tmp = PENDING_FILE + ".tmp"
+        with open(tmp, "w") as f:
+            json.dump(pending, f)
+        os.replace(tmp, PENDING_FILE)
+
+def _persist_pending_remove(gif_id):
+    with _pending_lock:
+        if not os.path.exists(PENDING_FILE):
+            return
+        try:
+            pending = json.load(open(PENDING_FILE))
+        except Exception:
+            return
+        new_pending = [p for p in pending if p[0] != gif_id]
+        if len(new_pending) == len(pending):
+            return
+        tmp = PENDING_FILE + ".tmp"
+        with open(tmp, "w") as f:
+            json.dump(new_pending, f)
+        os.replace(tmp, PENDING_FILE)
+
+def _extract_worker():
+    while True:
+        item = _extract_queue.get()
+        if item is None:
+            _extract_queue.task_done()
+            continue
+        gif_id, gif_type, gif_path = item
+        with _extract_lock:
+            _extract_status[gif_id] = "running"
+        try:
+            extract_subjects(gif_path, gif_id, gif_type)
+            with _extract_lock:
+                _extract_status[gif_id] = "ready"
+        except Exception as e:
+            print(f"[extract-worker] {gif_id} error: {e}")
+            with _extract_lock:
+                _extract_status[gif_id] = "error"
+        finally:
+            _persist_pending_remove(gif_id)
+            _extract_queue.task_done()
+
+def _resume_pending_on_startup():
+    """Re-enqueue any jobs persisted from a previous run."""
+    if not os.path.exists(PENDING_FILE):
+        return
+    try:
+        pending = json.load(open(PENDING_FILE))
+    except Exception:
+        return
+    for entry in pending:
+        if not (isinstance(entry, list) and len(entry) == 3):
+            continue
+        gif_id, gif_type, gif_path = entry
+        if not os.path.exists(gif_path):
+            continue   # raw GIF missing, can't process; drop silently
+        with _extract_lock:
+            _extract_status[gif_id] = "queued"
+        _extract_queue.put((gif_id, gif_type, gif_path))
+    if pending:
+        print(f"[extract-worker] resumed {len(pending)} pending jobs from disk")
+
+_resume_pending_on_startup()
+threading.Thread(target=_extract_worker, daemon=True, name="extract-worker").start()
+
+def _enqueue_extract(gif_id, gif_type, gif_path):
+    _persist_pending_add(gif_id, gif_type, gif_path)
+    with _extract_lock:
+        _extract_status[gif_id] = "queued"
+    _extract_queue.put((gif_id, gif_type, gif_path))
 
 
 # ── helpers ───────────────────────────────────────────────────────────────────
@@ -157,7 +251,11 @@ def _get_rembg_session():
         with _rembg_lock:
             if _rembg_session is None:
                 from rembg import new_session
-                _rembg_session = new_session("u2netp")  # fast lightweight model
+                providers = ["CoreMLExecutionProvider", "CPUExecutionProvider"]
+                try:
+                    _rembg_session = new_session("u2netp", providers=providers)
+                except TypeError:
+                    _rembg_session = new_session("u2netp")
     return _rembg_session
 
 
@@ -236,6 +334,9 @@ def extract_subjects(gif_path, gif_id, gif_type):
     subject_path = os.path.join(FRAMES_DIR, gif_id, "subject_spritesheet.png")
     meta         = load_json(meta_path, {})
 
+    if meta.get("user_edited"):
+        return meta.get("polygons", [])
+
     if meta.get("polygons") and os.path.exists(subject_path):
         return meta["polygons"]
 
@@ -258,19 +359,54 @@ def extract_subjects(gif_path, gif_id, gif_type):
         print(f"[subject] rembg unavailable: {e}")
         return []
 
+    n = len(frames)
+    k = min(REMBG_KEYFRAMES, n)
+    key_idx = sorted({int(round(j * (n - 1) / max(k - 1, 1))) for j in range(k)})
+
+    is_bg = (gif_type != "obstacle")
+    fw, fh = size
+    if is_bg and BG_REMBG_SCALE < 1.0:
+        sw, sh = max(1, int(fw * BG_REMBG_SCALE)), max(1, int(fh * BG_REMBG_SCALE))
+    else:
+        sw, sh = fw, fh
+
+    t0 = time.time()
+    key_alphas = {}   # idx -> uint8 HxW alpha at (fw, fh)
+    for i in key_idx:
+        try:
+            src = frames[i].resize((sw, sh), Image.LANCZOS) if (sw, sh) != (fw, fh) else frames[i]
+            removed = remove(src, session=session, alpha_matting=False)
+            alpha = removed.split()[-1]
+            if alpha.size != (fw, fh):
+                alpha = alpha.resize((fw, fh), Image.NEAREST)
+            key_alphas[i] = alpha
+        except Exception as e:
+            print(f"[subject] keyframe {i} failed for {gif_id}: {e}")
+            key_alphas[i] = None
+
+    def nearest_key(idx):
+        return min(key_alphas.keys(), key=lambda k_: abs(k_ - idx))
+
     subject_frames = []
     polygons       = []
-
     for i, frame in enumerate(frames):
         try:
-            removed = remove(frame, session=session, alpha_matting=False)
-            subject_frames.append(removed)
-            poly = _alpha_to_polygon(removed)
-            polygons.append(poly)
+            ki = i if i in key_alphas else nearest_key(i)
+            alpha = key_alphas.get(ki)
+            if alpha is None:
+                subject_frames.append(frame)
+                polygons.append([])
+                continue
+            rgba = frame.convert("RGBA")
+            rgba.putalpha(alpha)
+            subject_frames.append(rgba)
+            polygons.append(_alpha_to_polygon(rgba))
         except Exception as e:
             print(f"[subject] frame {i} failed for {gif_id}: {e}")
             subject_frames.append(frame)
             polygons.append([])
+
+    print(f"[subject] {gif_id}: {n} frames, {len(key_idx)} keyframes, {time.time()-t0:.1f}s")
 
     # Save subject spritesheet
     build_spritesheet(subject_frames, gif_id, "subject_spritesheet.png")
@@ -567,11 +703,14 @@ def process_all_subjects():
     for entry in pool["backgrounds"]:
         all_entries.append((entry["id"], "background"))
 
-    # Filter to only those that need processing
+    # Filter to only those that need processing.
+    # Skip user-edited GIFs entirely — manual edits must not be clobbered.
     to_process = []
     for gif_id, gif_type in all_entries:
         meta = load_json(os.path.join(FRAMES_DIR, gif_id, "meta.json"), {})
         subj = os.path.join(FRAMES_DIR, gif_id, "subject_spritesheet.png")
+        if meta.get("user_edited"):
+            continue
         if not (meta.get("polygons") and os.path.exists(subj)):
             to_process.append((gif_id, gif_type))
 
@@ -598,6 +737,23 @@ def process_all_subjects():
 @app.route("/api/subject_progress")
 def subject_progress():
     return jsonify(_subject_progress)
+
+
+@app.route("/api/subject_ready/<gif_id>")
+def subject_ready(gif_id):
+    """Lightweight per-GIF readiness for clients to poll after enqueueing."""
+    with _extract_lock:
+        state = _extract_status.get(gif_id)
+    meta = load_json(os.path.join(FRAMES_DIR, gif_id, "meta.json"), {})
+    sheet_exists = os.path.exists(os.path.join(FRAMES_DIR, gif_id, "subject_spritesheet.png"))
+    has_polys = bool(meta.get("polygons"))
+    if state is None:
+        state = "ready" if (has_polys and sheet_exists) else "unknown"
+    return jsonify({
+        "gif_id": gif_id,
+        "state":  state,
+        "ready":  state == "ready" or (has_polys and sheet_exists),
+    })
 
 
 @app.route("/api/upload", methods=["POST"])
@@ -727,7 +883,9 @@ def save_mask(gif_id):
         new_polys.append(_alpha_to_polygon(subj_f))
 
     build_spritesheet(new_frames, gif_id, "subject_spritesheet.png")
-    meta["polygons"] = new_polys
+    meta["polygons"]    = new_polys
+    meta["user_edited"] = True
+    meta["edited_at"]   = int(time.time())
     save_json(meta_path, meta)
 
     return jsonify({"ok": True, "polygons": new_polys})
@@ -1212,9 +1370,7 @@ def gphotos_approve():
             shutil.copy(src, dst)
 
         if t == "obstacle":
-            threading.Thread(
-                target=extract_subjects, args=(dst, gif_id, "obstacle"),
-                daemon=True).start()
+            _enqueue_extract(gif_id, "obstacle", dst)
         return gif_id
 
     if clip_type in ("obstacle", "both"):

@@ -37,9 +37,19 @@ ENV/
 *~
 .DS_Store
 
-# GIF curator data (local cache)
-geometry-dash-godot/gif_server/data/
-geometry-dash-godot/gif_server/.godot/
+# GIF curator data — commit pool.json, candidates.json, meta + spritesheets
+# Block raw GIFs, gphotos clips, OAuth tokens / session files
+geometry-dash-godot/gif_server/data/gifs/
+geometry-dash-godot/gif_server/data/gphotos_clips/
+geometry-dash-godot/gif_server/data/gphotos_token.json
+geometry-dash-godot/gif_server/data/gphotos_picker_session.json
+geometry-dash-godot/gif_server/data/gphotos_state.txt
+geometry-dash-godot/gif_server/data/gphotos_verifier.txt
+geometry-dash-godot/gif_server/client_secret.json
+geometry-dash-godot/gif_server/.env
+geometry-dash-godot/gif_server/.venv*/
+geometry-dash-godot/gif_server/__pycache__/
+geometry-dash-godot/.godot/
 
 # Game/engine binaries — never commit
 *.exe
