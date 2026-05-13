@@ -188,6 +188,9 @@ input[type=range] {
       <button class="tool-btn"        id="btn-fill"   onclick="setTool('fill')"   title="F">
         <span class="tool-icon">🪣</span> Fill
       </button>
+      <button class="tool-btn"        id="btn-wand"   onclick="setTool('wand')"   title="W">
+        <span class="tool-icon">🪄</span> Wand
+      </button>
     </div>
 
     <div>
@@ -200,6 +203,17 @@ input[type=range] {
         <input type="range" id="fill-tol" min="5" max="120" value="30"
                oninput="$('tol-label').textContent=this.value">
         <div id="tol-label" style="font-size:10px;color:var(--muted);text-align:center">30</div>
+        <div id="wand-opts" style="display:none;margin-top:6px">
+          <div class="section-label" style="margin-bottom:4px">Wand mode</div>
+          <label class="check-row">
+            <input type="radio" name="wand-mode" value="keep" checked
+                   onchange="wandMode='keep'"> Add (keep)
+          </label>
+          <label class="check-row">
+            <input type="radio" name="wand-mode" value="remove"
+                   onchange="wandMode='remove'"> Remove
+          </label>
+        </div>
       </div>
     </div>
 
@@ -233,6 +247,7 @@ input[type=range] {
       <div class="section-label">Keys</div>
       <div class="shortcut"><b>B</b> Keep &nbsp;<b>R</b> Remove</div>
       <div class="shortcut"><b>E</b> Erase &nbsp;<b>F</b> Fill</div>
+      <div class="shortcut"><b>W</b> Wand (this frame only)</div>
       <div class="shortcut"><b>← →</b> Frames</div>
       <div class="shortcut"><b>Space</b> Play/pause</div>
       <div class="shortcut"><b>Ctrl+Z/Y</b> Undo/Redo</div>
@@ -282,6 +297,7 @@ const DH      = FH * SCALE;
 // ── State ─────────────────────────────────────────────────────────────────────
 let curFrame  = 0;
 let tool      = 'keep';
+let wandMode  = 'keep';
 let brushSize = 32;
 let isPainting = false;
 let lastFX = -1, lastFY = -1;
@@ -520,9 +536,11 @@ function getFramePos(e) {
 }
 
 // ── Flood fill (BFS on original image colors) ─────────────────────────────────
-async function floodFill(startFX, startFY) {
+async function floodFill(startFX, startFY, opts = {}) {
+  const frameIdx = opts.frameIdx ?? curFrame;
+  const mode     = opts.mode ?? tool;
   const tol   = +$('fill-tol').value;
-  const orig  = origImgs[curFrame];
+  const orig  = origImgs[frameIdx];
   if (!orig) return;
 
   // Read original pixels
@@ -538,13 +556,13 @@ async function floodFill(startFX, startFY) {
     return Math.sqrt((oData[i]-seedR)**2 + (oData[i+1]-seedG)**2 + (oData[i+2]-seedB)**2);
   }
 
-  const mCtx   = maskCanvases[curFrame].getContext('2d');
+  const mCtx   = maskCanvases[frameIdx].getContext('2d');
   const mData  = mCtx.getImageData(0, 0, FW, FH);
   const md     = mData.data;
 
-  const [fr, fg, fb, fa] = tool === 'keep'
+  const [fr, fg, fb, fa] = mode === 'keep'
     ? [0, 220, 80, 234]
-    : tool === 'remove'
+    : mode === 'remove'
       ? [255, 50, 50, 234]
       : [0, 0, 0, 0];
 
@@ -590,6 +608,13 @@ display.addEventListener('mousedown', async e => {
     renderDisplay();
     renderPreview();
     if (e.button === 2) setTool(savedTool, true);
+    return;
+  }
+
+  if (tool === 'wand') {
+    await floodFill(fx, fy, {frameIdx: curFrame, mode: wandMode});
+    renderDisplay();
+    renderPreview();
     return;
   }
 
@@ -663,9 +688,10 @@ function doRedo() {
 function setTool(t, silent=false) {
   tool = t;
   if (!silent) {
-    ['keep','remove','erase','fill'].forEach(n =>
+    ['keep','remove','erase','fill','wand'].forEach(n =>
       $('btn-'+n).classList.toggle('active', n === t));
-    $('fill-opts').classList.toggle('visible', t === 'fill');
+    $('fill-opts').classList.toggle('visible', t === 'fill' || t === 'wand');
+    $('wand-opts').style.display = (t === 'wand') ? 'block' : 'none';
   }
 }
 
@@ -820,6 +846,7 @@ document.addEventListener('keydown', e => {
   else if (k === 'r' || k === 'R') setTool('remove');
   else if (k === 'e' || k === 'E') setTool('erase');
   else if (k === 'f' || k === 'F') setTool('fill');
+  else if (k === 'w' || k === 'W') setTool('wand');
   else if (k === ' ')   { e.preventDefault(); togglePlay(); }
   else if (k === 'ArrowLeft')  { e.preventDefault(); switchFrame(curFrame - 1); }
   else if (k === 'ArrowRight') { e.preventDefault(); switchFrame(curFrame + 1); }
