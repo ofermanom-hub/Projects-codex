@@ -492,7 +492,7 @@
     "audio_url": "/api/gphotos/audio/gp_5f521ee6855d",
     "audio_start": 0.0,
     "audio_duration": 2.25,
-    "audio_volume": 2.0,
+    "audio_volume": 1.0,
     "audio_enabled": true,
     "status": "both",
     "source_duration": 16.63,
@@ -513,9 +513,10 @@
     "audio_start": 0.0,
     "audio_duration": 3.0,
     "audio_volume": 1.0,
-    "audio_enabled": false,
+    "audio_enabled": true,
     "status": "both",
-    "source_duration": 9.03
+    "source_duration": 9.03,
+    "audio_enhanced": true
   },
   {
     "clip_id": "yt_75170fc230cd",
@@ -527,8 +528,8 @@
     "source_duration": 213.09,
     "audio_url": "/api/gphotos/audio/yt_75170fc230cd",
     "audio_start": 0.0,
-    "audio_end": 30.0,
-    "audio_duration": 30.0,
+    "audio_end": 9.3,
+    "audio_duration": 9.3,
     "audio_volume": 1.0,
     "audio_enabled": true,
     "status": "sound_only",
