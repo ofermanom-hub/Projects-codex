@@ -492,7 +492,7 @@
     "audio_url": "/api/gphotos/audio/gp_5f521ee6855d",
     "audio_start": 0.0,
     "audio_duration": 2.25,
-    "audio_volume": 1.0,
+    "audio_volume": 2.0,
     "audio_enabled": true,
     "status": "both",
     "source_duration": 16.63,
