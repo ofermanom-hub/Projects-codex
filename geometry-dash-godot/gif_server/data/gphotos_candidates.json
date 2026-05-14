@@ -513,7 +513,7 @@
     "audio_start": 0.0,
     "audio_duration": 3.0,
     "audio_volume": 1.0,
-    "audio_enabled": true,
+    "audio_enabled": false,
     "status": "both",
     "source_duration": 9.03,
     "audio_enhanced": true
