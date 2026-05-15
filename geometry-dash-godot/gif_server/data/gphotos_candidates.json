@@ -611,7 +611,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "skip"
+    "status": "pending"
   },
   {
     "clip_id": "gp_de9a96094686",
@@ -625,11 +625,30 @@
     "frame_count": 30,
     "preview_url": "/api/gphotos/preview/gp_de9a96094686",
     "audio_url": "/api/gphotos/audio/gp_de9a96094686",
-    "audio_start": 1.26,
-    "audio_end": 4.26,
+    "audio_start": 0.0,
+    "audio_end": 1.55,
+    "audio_duration": 1.55,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "pending"
+  },
+  {
+    "clip_id": "gp_4c3e6e230ff8",
+    "gp_id": "AAD2GUWUoK7yGMga4KDzRUdjlP1fNLnTZh6TD-6TioWhiAKqwKzHdya1XCxxL1lZT7_TumwGcJ2xB2KHzJaOuBhOA_ciLs1O8w",
+    "year": "2025",
+    "filename": "IMG_5422.MOV",
+    "duration": 27.3,
+    "source_duration": 27.28,
+    "start_sec": 18.54,
+    "fps": 10.0,
+    "frame_count": 30,
+    "preview_url": "/api/gphotos/preview/gp_4c3e6e230ff8",
+    "audio_url": "/api/gphotos/audio/gp_4c3e6e230ff8",
+    "audio_start": 18.54,
+    "audio_end": 21.54,
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "both"
+    "status": "pending"
   }
 ]
