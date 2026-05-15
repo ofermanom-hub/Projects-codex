@@ -845,5 +845,25 @@
     "audio_volume": 1.0,
     "audio_enabled": true,
     "status": "pending"
+  },
+  {
+    "clip_id": "gp_9d6a7a6624ce",
+    "gp_id": "4CB9B560-BEF6-426B-AC1D-B41A26E124DD",
+    "source": "localphotos",
+    "year": "2020",
+    "filename": "Facesitting+Torture.mp4",
+    "duration": 1110.0,
+    "source_duration": 1110.03,
+    "start_sec": 215.34,
+    "fps": 10.0,
+    "frame_count": 30,
+    "preview_url": "/api/gphotos/preview/gp_9d6a7a6624ce",
+    "audio_url": "/api/gphotos/audio/gp_9d6a7a6624ce",
+    "audio_start": 215.34,
+    "audio_end": 218.34,
+    "audio_duration": 3.0,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "pending"
   }
 ]
