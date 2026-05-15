@@ -588,9 +588,10 @@
     "audio_start": 0.0,
     "audio_end": 0.96,
     "audio_duration": 0.96,
-    "audio_volume": 1.0,
+    "audio_volume": 8.0,
     "audio_enabled": true,
     "status": "sound_only",
-    "preview_url": "/api/sounds/mic_adfc24a12c/thumb"
+    "preview_url": "/api/sounds/mic_adfc24a12c/thumb",
+    "audio_enhanced": true
   }
 ]
