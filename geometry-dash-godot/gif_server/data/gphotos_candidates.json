@@ -531,7 +531,7 @@
     "audio_end": 9.3,
     "audio_duration": 9.3,
     "audio_volume": 1.0,
-    "audio_enabled": true,
+    "audio_enabled": false,
     "status": "sound_only",
     "preview_url": "/api/sounds/yt_75170fc230cd/thumb"
   },
@@ -665,7 +665,7 @@
     "audio_end": 0.42,
     "audio_duration": 0.42,
     "audio_volume": 1.0,
-    "audio_enabled": true,
+    "audio_enabled": false,
     "status": "sound_only",
     "preview_url": "/api/sounds/mic_6296534841/thumb"
   },
@@ -682,8 +682,25 @@
     "audio_end": 0.66,
     "audio_duration": 0.66,
     "audio_volume": 1.0,
-    "audio_enabled": true,
+    "audio_enabled": false,
     "status": "sound_only",
     "preview_url": "/api/sounds/mic_064c06d84e/thumb"
+  },
+  {
+    "clip_id": "mic_adfc24a12c",
+    "source": "mic",
+    "filename": "mic 8:08:49 AM",
+    "title": "mic 8:08:49 AM",
+    "year": "",
+    "duration": 1.0,
+    "source_duration": 0.96,
+    "audio_url": "/api/gphotos/audio/mic_adfc24a12c",
+    "audio_start": 0.0,
+    "audio_end": 0.96,
+    "audio_duration": 0.96,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "sound_only",
+    "preview_url": "/api/sounds/mic_adfc24a12c/thumb"
   }
 ]
