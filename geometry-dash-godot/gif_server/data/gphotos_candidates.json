@@ -548,7 +548,7 @@
     "audio_end": 3.35,
     "audio_duration": 1.9,
     "audio_volume": 2.0,
-    "audio_enabled": true,
+    "audio_enabled": false,
     "status": "sound_only",
     "preview_url": "/api/sounds/mic_8501667508/thumb",
     "audio_enhanced": true
@@ -569,7 +569,7 @@
     "audio_end": 3.0,
     "audio_duration": 3.0,
     "audio_volume": null,
-    "audio_enabled": true,
+    "audio_enabled": false,
     "status": "skip",
     "audio_enhanced": true
   },
@@ -584,13 +584,14 @@
     "fps": 10.0,
     "frame_count": 30,
     "preview_url": "/api/gphotos/preview/gp_9bf74d7b4050",
-    "audio_url": null,
+    "audio_url": "/api/gphotos/audio/gp_9bf74d7b4050",
     "audio_start": null,
     "audio_end": null,
     "audio_duration": null,
     "audio_volume": null,
     "audio_enabled": true,
-    "status": "both"
+    "status": "both",
+    "audio_enhanced": true
   },
   {
     "clip_id": "gp_797c68c8db9a",
