@@ -783,5 +783,43 @@
     "audio_volume": 1.0,
     "audio_enabled": true,
     "status": "pending"
+  },
+  {
+    "clip_id": "gp_784dd4c1c4e6",
+    "gp_id": "AAD2GUVToZLKOdwmXMJ1DGqULI7y8MKhFIU-YNydbarfuqTZTUB30KQZgnrEdnFlkKQ4tjNvBvqBpN0Kh3MLiDMkz2gX5ZFVDg",
+    "year": "2025",
+    "filename": "018ae441-3b5b-4933-9d4b-664e28d00b8d.mp4",
+    "duration": 48.0,
+    "source_duration": 48.04,
+    "start_sec": 25.01,
+    "fps": 10.0,
+    "frame_count": 30,
+    "preview_url": "/api/gphotos/preview/gp_784dd4c1c4e6",
+    "audio_url": "/api/gphotos/audio/gp_784dd4c1c4e6",
+    "audio_start": 25.01,
+    "audio_end": 28.01,
+    "audio_duration": 3.0,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "pending"
+  },
+  {
+    "clip_id": "gp_08f1163d0fe6",
+    "gp_id": "AAD2GUVJuPrW1G2xOWg5Er9l2JZ0FIZS4Bz3g6_SXa9OyAlML3OSSJif9XOGnS3rxfyBEB2rUBf2rlJWR4uFBu-6U92uc2Dmwg",
+    "year": "2026",
+    "filename": "aaaa5221-6c62-49d0-b41e-273d14d856dd.mp4",
+    "duration": 187.9,
+    "source_duration": 187.87,
+    "start_sec": 147.54,
+    "fps": 10.0,
+    "frame_count": 30,
+    "preview_url": "/api/gphotos/preview/gp_08f1163d0fe6",
+    "audio_url": "/api/gphotos/audio/gp_08f1163d0fe6",
+    "audio_start": 147.54,
+    "audio_end": 150.54,
+    "audio_duration": 3.0,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "pending"
   }
 ]
