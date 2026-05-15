@@ -553,7 +553,7 @@
     "audio_duration": 5.05,
     "audio_volume": 2.0,
     "audio_enabled": true,
-    "status": "pending",
+    "status": "skip",
     "audio_enhanced": true
   },
   {
@@ -593,5 +593,43 @@
     "status": "sound_only",
     "preview_url": "/api/sounds/mic_adfc24a12c/thumb",
     "audio_enhanced": true
+  },
+  {
+    "clip_id": "gp_a722d38110a6",
+    "gp_id": "AAD2GUW898oC8P9VXxkb2ymv3TJhF9ZrjcfeHmQkWk34McaqQO0o_a0aDUpsACczZChVEPuvl0MKHO77RaHe79JnHuMChhDi8g",
+    "year": "2023",
+    "filename": "camera-25F58BBB-DE04-49D0-82E4-F0A8E87889F4-872-0000007FFF342231.mov",
+    "duration": 7.5,
+    "source_duration": 7.45,
+    "start_sec": 1.55,
+    "fps": 10.0,
+    "frame_count": 30,
+    "preview_url": "/api/gphotos/preview/gp_a722d38110a6",
+    "audio_url": "/api/gphotos/audio/gp_a722d38110a6",
+    "audio_start": 1.55,
+    "audio_end": 4.55,
+    "audio_duration": 3.0,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "skip"
+  },
+  {
+    "clip_id": "gp_de9a96094686",
+    "gp_id": "AAD2GUWPsPOEGBip5hW4Q6GzQQZqhsC6CNLcBfA147Jo09Jl00pMneMFEZMn2qRZgk-4LXHzppP4_S9d7UM0lNUwpqxmZVcXJA",
+    "year": "2024",
+    "filename": "A87BDA5B-3C87-4001-A898-E24295116B85.mp4",
+    "duration": 7.9,
+    "source_duration": 7.87,
+    "start_sec": 1.26,
+    "fps": 10.0,
+    "frame_count": 30,
+    "preview_url": "/api/gphotos/preview/gp_de9a96094686",
+    "audio_url": "/api/gphotos/audio/gp_de9a96094686",
+    "audio_start": 1.26,
+    "audio_end": 4.26,
+    "audio_duration": 3.0,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "both"
   }
 ]
