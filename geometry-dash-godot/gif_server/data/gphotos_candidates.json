@@ -663,9 +663,9 @@
     "frame_count": 30,
     "preview_url": "/api/gphotos/preview/gp_23b8c5a74352",
     "audio_url": "/api/gphotos/audio/gp_23b8c5a74352",
-    "audio_start": 106.02,
-    "audio_end": 109.02,
-    "audio_duration": 3.0,
+    "audio_start": 0.0,
+    "audio_end": 8.75,
+    "audio_duration": 8.75,
     "audio_volume": 1.0,
     "audio_enabled": true,
     "status": "background"
@@ -706,7 +706,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_24d450b7339d",
