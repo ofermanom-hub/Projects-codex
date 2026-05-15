@@ -745,24 +745,5 @@
     "audio_volume": 1.0,
     "audio_enabled": true,
     "status": "background"
-  },
-  {
-    "clip_id": "gp_08f1163d0fe6",
-    "gp_id": "AAD2GUVJuPrW1G2xOWg5Er9l2JZ0FIZS4Bz3g6_SXa9OyAlML3OSSJif9XOGnS3rxfyBEB2rUBf2rlJWR4uFBu-6U92uc2Dmwg",
-    "year": "2026",
-    "filename": "aaaa5221-6c62-49d0-b41e-273d14d856dd.mp4",
-    "duration": 187.9,
-    "source_duration": 187.87,
-    "start_sec": 147.54,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_08f1163d0fe6",
-    "audio_url": "/api/gphotos/audio/gp_08f1163d0fe6",
-    "audio_start": 147.54,
-    "audio_end": 150.54,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "both"
   }
 ]
