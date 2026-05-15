@@ -764,7 +764,7 @@
     "audio_duration": null,
     "audio_volume": null,
     "audio_enabled": false,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_76069757c0a9",
@@ -784,7 +784,7 @@
     "audio_duration": null,
     "audio_volume": null,
     "audio_enabled": false,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_df3e19407327",
@@ -804,6 +804,6 @@
     "audio_duration": null,
     "audio_volume": null,
     "audio_enabled": false,
-    "status": "pending"
+    "status": "skip"
   }
 ]
