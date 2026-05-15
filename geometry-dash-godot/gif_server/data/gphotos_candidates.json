@@ -651,5 +651,39 @@
     "audio_enabled": false,
     "status": "both",
     "audio_enhanced": true
+  },
+  {
+    "clip_id": "mic_6296534841",
+    "source": "mic",
+    "filename": "mic recording",
+    "title": "mic recording",
+    "year": "",
+    "duration": 0.4,
+    "source_duration": 0.42,
+    "audio_url": "/api/gphotos/audio/mic_6296534841",
+    "audio_start": 0.0,
+    "audio_end": 0.42,
+    "audio_duration": 0.42,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "sound_only",
+    "preview_url": "/api/sounds/mic_6296534841/thumb"
+  },
+  {
+    "clip_id": "mic_064c06d84e",
+    "source": "mic",
+    "filename": "mic 8:07:56 AM",
+    "title": "mic 8:07:56 AM",
+    "year": "",
+    "duration": 0.7,
+    "source_duration": 0.66,
+    "audio_url": "/api/gphotos/audio/mic_064c06d84e",
+    "audio_start": 0.0,
+    "audio_end": 0.66,
+    "audio_duration": 0.66,
+    "audio_volume": 1.0,
+    "audio_enabled": true,
+    "status": "sound_only",
+    "preview_url": "/api/sounds/mic_064c06d84e/thumb"
   }
 ]
