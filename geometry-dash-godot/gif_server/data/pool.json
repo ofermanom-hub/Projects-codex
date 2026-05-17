@@ -66375,6 +66375,22 @@
       ],
       "has_subject": true,
       "version": 1778827044
+    },
+    {
+      "id": "gp_81770e5f6aff79",
+      "frame_count": 6,
+      "fps": 10.0,
+      "frame_width": 64,
+      "frame_height": 64,
+      "preview_url": "/api/gif/gp_81770e5f6aff79"
+    },
+    {
+      "id": "gp_8951cb8b1b502d",
+      "frame_count": 30,
+      "fps": 10.0,
+      "frame_width": 64,
+      "frame_height": 64,
+      "preview_url": "/api/gif/gp_8951cb8b1b502d"
     }
   ],
   "backgrounds": [
@@ -100233,6 +100249,22 @@
       "polygons": [],
       "has_subject": false,
       "version": 1778827052
+    },
+    {
+      "id": "gp_61dd2726c0a389",
+      "frame_count": 6,
+      "fps": 10.0,
+      "frame_width": 640,
+      "frame_height": 180,
+      "preview_url": "/api/gif/gp_61dd2726c0a389"
+    },
+    {
+      "id": "gp_e23381f37c9da8",
+      "frame_count": 30,
+      "fps": 10.0,
+      "frame_width": 640,
+      "frame_height": 180,
+      "preview_url": "/api/gif/gp_e23381f37c9da8"
     }
   ]
 }
