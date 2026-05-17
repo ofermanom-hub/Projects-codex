@@ -909,26 +909,6 @@
     "status": "skip"
   },
   {
-    "clip_id": "gp_76d4b464f5f8",
-    "gp_id": "4AF38610-18EA-49B5-B2AC-A0C5C8FD8869",
-    "source": "localphotos",
-    "year": "2020",
-    "filename": "IMG_8743.mov",
-    "duration": 18.4,
-    "source_duration": 18.36,
-    "start_sec": 12.45,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_76d4b464f5f8",
-    "audio_url": "/api/gphotos/audio/gp_76d4b464f5f8",
-    "audio_start": 12.45,
-    "audio_end": 15.45,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "skip"
-  },
-  {
     "clip_id": "gp_9647c582dab2",
     "gp_id": "58F4A535-644A-43E5-9C75-425BB2FF7C44",
     "source": "localphotos",
@@ -941,12 +921,13 @@
     "frame_count": 30,
     "preview_url": "/api/gphotos/preview/gp_9647c582dab2",
     "audio_url": "/api/gphotos/audio/gp_9647c582dab2",
-    "audio_start": 6.95,
-    "audio_end": 9.95,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "skip"
+    "audio_start": 4.55,
+    "audio_end": 10.6,
+    "audio_duration": 6.05,
+    "audio_volume": 6.6,
+    "audio_enabled": true,
+    "status": "skip",
+    "audio_enhanced": true
   },
   {
     "clip_id": "gp_f5c044a6e546",
@@ -1007,25 +988,5 @@
     "audio_volume": 1.0,
     "audio_enabled": false,
     "status": "pending"
-  },
-  {
-    "clip_id": "gp_7ea5fd74e055",
-    "gp_id": "D07F6E0C-FF66-4D77-92B1-F60ABD3D97CF",
-    "source": "localphotos",
-    "year": "2016",
-    "filename": "IMG_1780.mp4",
-    "duration": 22.8,
-    "source_duration": 22.8,
-    "start_sec": 5.15,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_7ea5fd74e055",
-    "audio_url": "/api/gphotos/audio/gp_7ea5fd74e055",
-    "audio_start": 5.15,
-    "audio_end": 8.15,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "skip"
   }
 ]
