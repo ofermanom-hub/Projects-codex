@@ -1020,9 +1020,9 @@
     "preview_url": "/api/gphotos/preview/gp_09b675fc7f2b",
     "audio_url": "/api/gphotos/audio/gp_09b675fc7f2b",
     "audio_start": 8.02,
-    "audio_end": 11.02,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
+    "audio_end": 13.7,
+    "audio_duration": 5.68,
+    "audio_volume": 8.0,
     "audio_enabled": true,
     "status": "both",
     "audio_enhanced": true
