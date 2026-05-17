@@ -1024,26 +1024,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "both"
-  },
-  {
-    "clip_id": "gp_a0548193b70b",
-    "gp_id": "C4871369-B720-4C83-BD53-8D804F7ABAA4",
-    "source": "localphotos",
-    "year": "2021",
-    "filename": "IMG_5100.MOV",
-    "duration": 25.7,
-    "source_duration": 25.69,
-    "start_sec": 19.97,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_a0548193b70b",
-    "audio_url": "/api/gphotos/audio/gp_a0548193b70b",
-    "audio_start": 19.97,
-    "audio_end": 22.97,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": true,
-    "status": "both"
+    "status": "both",
+    "audio_enhanced": true
   }
 ]
