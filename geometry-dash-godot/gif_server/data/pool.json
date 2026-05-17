@@ -77547,6 +77547,14 @@
       "frame_width": 64,
       "frame_height": 64,
       "preview_url": "/api/gif/gp_b4e25ed3b3e5cf"
+    },
+    {
+      "id": "gp_6fe6f156b4eeb6",
+      "frame_count": 30,
+      "fps": 10.0,
+      "frame_width": 64,
+      "frame_height": 64,
+      "preview_url": "/api/gif/gp_6fe6f156b4eeb6"
     }
   ],
   "backgrounds": [
@@ -110272,6 +110280,14 @@
       "frame_width": 640,
       "frame_height": 180,
       "preview_url": "/api/gif/gp_e41e393cc88571"
+    },
+    {
+      "id": "gp_4815f91d140ebf",
+      "frame_count": 30,
+      "fps": 10.0,
+      "frame_width": 640,
+      "frame_height": 180,
+      "preview_url": "/api/gif/gp_4815f91d140ebf"
     }
   ]
 }
