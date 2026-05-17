@@ -926,7 +926,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": false,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_9647c582dab2",
@@ -946,7 +946,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": false,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_f5c044a6e546",
@@ -1026,86 +1026,6 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": false,
-    "status": "pending"
-  },
-  {
-    "clip_id": "gp_520133285857",
-    "gp_id": "5AF949F0-025B-4340-95E3-B2BCB760669B",
-    "source": "localphotos",
-    "year": "2018",
-    "filename": "IMG_6011.MOV",
-    "duration": 27.3,
-    "source_duration": 27.29,
-    "start_sec": 21.18,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_520133285857",
-    "audio_url": "/api/gphotos/audio/gp_520133285857",
-    "audio_start": 21.18,
-    "audio_end": 24.18,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "pending"
-  },
-  {
-    "clip_id": "gp_c2fe9e732c67",
-    "gp_id": "F87A91D7-2C5A-4552-BB8C-A56056BB9A41",
-    "source": "localphotos",
-    "year": "2015",
-    "filename": "IMG_0262.mp4",
-    "duration": 41.6,
-    "source_duration": 41.63,
-    "start_sec": 4.43,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_c2fe9e732c67",
-    "audio_url": "/api/gphotos/audio/gp_c2fe9e732c67",
-    "audio_start": 4.43,
-    "audio_end": 7.43,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "pending"
-  },
-  {
-    "clip_id": "gp_35fd3f30a707",
-    "gp_id": "BFE744BA-AC2D-4F99-ABF9-1E2493B8DC71",
-    "source": "localphotos",
-    "year": "2026",
-    "filename": "63ef1a9d-0403-4203-9bac-767e1c5bd394.mp4",
-    "duration": 26.8,
-    "source_duration": 26.8,
-    "start_sec": 11.77,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_35fd3f30a707",
-    "audio_url": "/api/gphotos/audio/gp_35fd3f30a707",
-    "audio_start": 11.77,
-    "audio_end": 14.77,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "pending"
-  },
-  {
-    "clip_id": "gp_0b1d4a49d828",
-    "gp_id": "38D56FDB-098B-4C2A-8980-1FD18B72B638",
-    "source": "localphotos",
-    "year": "2022",
-    "filename": "3444a715-a34b-4243-a690-1e3198576eb1.mp4",
-    "duration": 38.1,
-    "source_duration": 38.06,
-    "start_sec": 15.9,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_0b1d4a49d828",
-    "audio_url": "/api/gphotos/audio/gp_0b1d4a49d828",
-    "audio_start": 15.9,
-    "audio_end": 18.9,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": false,
-    "status": "pending"
+    "status": "skip"
   }
 ]
