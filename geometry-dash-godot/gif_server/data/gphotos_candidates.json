@@ -886,7 +886,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_884468e74c8a",
@@ -906,6 +906,6 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   }
 ]
