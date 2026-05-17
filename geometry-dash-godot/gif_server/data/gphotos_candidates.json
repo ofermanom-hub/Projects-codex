@@ -1187,25 +1187,5 @@
     "audio_volume": 1.0,
     "audio_enabled": true,
     "status": "pending"
-  },
-  {
-    "clip_id": "gp_eee0ffe6220f",
-    "gp_id": "B8568AA7-4DE3-49AA-AD39-4B8ED4196813",
-    "source": "localphotos",
-    "year": "2022",
-    "filename": "IMG_0841.MOV",
-    "duration": 17.9,
-    "source_duration": 17.85,
-    "start_sec": 5.3,
-    "fps": 10.0,
-    "frame_count": 30,
-    "preview_url": "/api/gphotos/preview/gp_eee0ffe6220f",
-    "audio_url": "/api/gphotos/audio/gp_eee0ffe6220f",
-    "audio_start": 5.3,
-    "audio_end": 8.3,
-    "audio_duration": 3.0,
-    "audio_volume": 1.0,
-    "audio_enabled": true,
-    "status": "pending"
   }
 ]
