@@ -926,7 +926,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": false,
-    "status": "skip"
+    "status": "pending"
   },
   {
     "clip_id": "gp_9647c582dab2",
@@ -946,6 +946,26 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": false,
-    "status": "both"
+    "status": "pending"
+  },
+  {
+    "clip_id": "gp_409b95cc54c9",
+    "gp_id": "01BCDD4D-C842-4925-9F38-7C6ECDB49F36",
+    "source": "localphotos",
+    "year": "2023",
+    "filename": "IMG_9834.MOV",
+    "duration": 26.2,
+    "source_duration": 26.22,
+    "start_sec": 3.1,
+    "fps": 10.0,
+    "frame_count": 30,
+    "preview_url": "/api/gphotos/preview/gp_409b95cc54c9",
+    "audio_url": "/api/gphotos/audio/gp_409b95cc54c9",
+    "audio_start": 3.1,
+    "audio_end": 6.1,
+    "audio_duration": 3.0,
+    "audio_volume": 1.0,
+    "audio_enabled": false,
+    "status": "pending"
   }
 ]
