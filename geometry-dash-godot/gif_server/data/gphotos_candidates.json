@@ -846,7 +846,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "both"
   },
   {
     "clip_id": "gp_6c098b3d2d22",
@@ -866,7 +866,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_29e0728345a0",
@@ -886,7 +886,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_525e8b0fb8ba",
@@ -906,7 +906,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_dc8233a677ac",
@@ -926,7 +926,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_ac557f3e3fdf",
@@ -946,7 +946,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "both"
   },
   {
     "clip_id": "gp_9f5c8a826fde",
@@ -966,7 +966,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_14d839163676",
@@ -986,7 +986,7 @@
     "audio_duration": 3.0,
     "audio_volume": 1.0,
     "audio_enabled": true,
-    "status": "pending"
+    "status": "skip"
   },
   {
     "clip_id": "gp_a4d77ccaa705",
